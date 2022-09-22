@@ -1,19 +1,16 @@
 import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import TextField from "@mui/material/TextField";
 
-import {
-  Grid,
-  Card,
-  CardActions,
-  CardMedia,
-  Button,
-  CardContent,
-  Typography,
-  ButtonGroup,
-  TextField,
-} from "@mui/material";
-
-const ProductList = ({
+const ProductItemCard = ({
   products,
   onAddToCart,
   onIncrementQty,
@@ -36,37 +33,36 @@ const ProductList = ({
               <Grid item md={4} key={prod.id} marginTop={1}>
                 <Card>
                   <CardMedia
-                    style={{
-                      height: "450px",
-                      marginLeft: "20px",
-                      marginTop: "10px",
-                      width: "300px",
-                    }}
                     component="img"
+                    height="400"
                     image={prod.imageUrl}
-                    alt="Image"
                   />
-
                   <CardContent>
                     <Typography gutterBottom variant="h5" fontWeight="bold">
                       {prod.name}
                     </Typography>
                     <Typography gutterBottom variant="h6" fontWeight="bold">
-                      ₱.{prod.price}
+                      ₱{prod.price}
                     </Typography>
+
                     <Typography variant="body2">{prod.description}</Typography>
                   </CardContent>
                   <CardActions>
                     {prod.qty > 0 ? (
-                      <ButtonGroup variant="contained">
+                      <ButtonGroup
+                        variant="contained"
+                        aria-label="outlined primary button group"
+                        direction="row"
+                        fullWidth
+                        textlign="center"
+                      >
                         <Button onClick={() => onDecrementQty(prod.id)}>
                           -
                         </Button>
                         <TextField
                           sx={{
-                            width: { sm: 50, md: 60 },
                             "& .MuiInputBase-root": {
-                              height: 42,
+                              height: 43,
                             },
                           }}
                           value={prod.qty}
@@ -80,6 +76,7 @@ const ProductList = ({
                         onClick={() => onAddToCart(prod.id)}
                         variant="contained"
                         size="large"
+                        fullWidth
                       >
                         Add To Cart
                       </Button>
@@ -95,4 +92,4 @@ const ProductList = ({
   );
 };
 
-export default ProductList;
+export default ProductItemCard;
